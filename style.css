@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    font-family: helvetica;
+    font-family: 'Poppins', helvetica;
 }
 body{
     width: 100vw;
     height: 100vh;
+    min-height: 600px;
 }
 .welcome-page{
     position: absolute;
@@ -23,6 +25,7 @@ body{
     justify-content: center;
     align-items: center;
     z-index: 1;
+    transition: ease-in-out .5s;
 }
 .welcome-page .welcome{
     display: flex;
@@ -35,6 +38,7 @@ body{
     background: rgba(255, 255, 255, 0.646);
     border-radius: 10%;
     z-index: 2;
+    box-shadow: 2px 2px 10px black;
 }
 .welcome-page .welcome .game-title{
     font-family: "Architects daughter";
@@ -65,6 +69,7 @@ body{
     font-weight: bolder;
     border-radius: 10px;
     transition: ease .3s ;
+    border: none;
 }
 .welcome-page .welcome .play-button:active,
 .welcome-page .welcome .instructions-button:active{
@@ -78,26 +83,26 @@ body{
 
 .difficulty-page{
     z-index: 2;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: absolute;
     left: 0;
-    top: -100%;
+    top: -200%;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: ease .5s;
-    
+    transition: ease-in-out .5s;
 }
 .difficulty-page .difficulty-options{
     width: 700px;
     height: 500px;
-    background: linear-gradient(rgb(131, 151, 151), rgb(139, 184, 174));
+    background: rgba(255, 255, 255, 0.876);
     position: relative;
     border-radius: 20px;
+    box-shadow: 2px 2px 10px black;
     
 }
-.difficulty-page .difficulty-options .difficulty-instructions{
+.difficulty-instructions{
    height: 50px;
    display: flex;
    justify-content: center;
@@ -106,6 +111,24 @@ body{
    border-top-left-radius: 20px;
    border-top-right-radius: 20px;
    color: white;
+   position: relative;
+}
+.difficulty-instructions .back{
+    height: 100%;
+    width: 50px;
+    background: transparent;
+    color: white;
+    font-size: 2rem;
+    position: absolute;
+    top: 0;
+    left: 2px;
+    border: none;
+    outline: none;
+    transition: ease .5s;
+    border-radius: 50%;
+}
+.difficulty-instructions .back:hover{
+    background-color: rgba(255, 255, 255, 0.267);
 }
 .difficulty-page .difficulty-options .difficulty-instructions h2{
     font-family: 'Architects Daughter';
@@ -125,6 +148,7 @@ body{
     height: 100px;
     border-radius: 10px;
     border: none;
+    box-shadow: 2px 2px 5px black;
 }
 .difficulty-page .difficulty-options .choices button:active{
     animation: clicked .2s;
@@ -132,7 +156,177 @@ body{
 .difficulty-page .difficulty-options .choices button h3{
     font-family: 'Architects Daughter';
     font-weight: bolder;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
+    color: rgb(41, 79, 82);
+    text-shadow: 0px 0px 20px rgb(97, 97, 97);
+    font-weight: bolder;
+}
+.instruction-page{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    top: -200%;
+    left: 0;
+    transition: ease-in-out .5s;
+}
+.instruction-page .instruction-set{
+    width: 700px;
+    height: 500px;
+    background: linear-gradient(rgb(131, 151, 151), rgb(139, 184, 174));
+    position: relative;
+    border-radius: 20px;
+}
+
+.game-page{
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, rgb(0, 217, 255), rgb(0, 255, 191));
+    color: rgb(12, 84, 93);
+}
+.game-page .container{
+    width: 800px;
+    height: 550px;
+    background:  rgba(255, 255, 255, 0.671);
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    box-shadow: 2px 2px 5px gray;
+}
+.game-page .container .about-corner{
+    background: rgba(255, 255, 255, 0.527);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.game-page .container .about-corner .player{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 140px;
+}
+.game-page .container .about-corner .player .player-avatar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game-page .container .about-corner .player .player-avatar img{
+    width: 80px;
+    height: 70px;
+    border-radius: 50%;
+}
+.game-page .container .about-corner .player .player-name{
+    font-size: .8rem;
+}
+.game-page .container .about-corner .settings{
+    background: rgb(89, 198, 212);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:10px 0;
+    gap: 8px;
+}
+.game-page .container .about-corner .settings button{
+    background: #ffffffc0;
+    width: 50px;
+    height: 40px;
+    border: none;
+    box-shadow: 2px 2px 5px gray;
+    border-radius: 10px;
+    transition: ease .2s;
+}
+.game-page .container .about-corner .settings button:hover{
+    transform: scale(1.1);
+}
+.game-page .container .about-corner .settings button:active{
+    animation: clicked .1s;
+}
+.game-page .container .about-corner .game-stat{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;  
+    padding: 20px 0;
+}
+.game-page .container .about-corner .game-stat > div{
+    display: flex;
+    width: 120px;
+    flex-direction: row;
+    gap: 15px;
+}
+.game-page .container .about-corner .game-stat > div .icon{
+    font-size: 1.5rem;
+}
+.game-page .container .about-corner .game-stat > div .stat h2{
+    font-size: .7rem;
+}
+.game-page .container .about-corner .goal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game-page .container .about-corner .goal .btn-goal{
+    width: 90px;
+    height: 81px;
+    background: url(Pictures/Easy-mode/Full-img.jpg) no-repeat center;
+    background-size: cover; 
+    transition: ease .2s;  
+    border: none; 
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px black;
+}
+.game-page .container .about-corner .goal .btn-goal:hover{
+    transform: scale(1.1);
+    box-shadow: 2px 2px 8px black;
+}
+.game-page .container .about-corner .goal .btn-goal:active{
+    animation: clicked .1s;
+    box-shadow: 1px 1px 8px black;
+}
+.game-page .container .game-corner{
+    display: grid;
+    grid-template-rows: 70px 1fr;
+}
+
+.game-page .container .game-corner .game-header{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 90%
+}
+.game-page .container .game-corner .game-header h1{
+    font-family: 'Architects daughter', 'Poppins';
+   
+}
+.game-page .container .game-corner .game-header .shape{
+    width: 90%;
+    height: 10px;
+    background:rgb(30, 187, 207);
+    border-radius: 10px;
+}
+.game-page .container .game-corner .game-board{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.game-page .container .game-corner .game-board .puzzle-board{
+    width: 400px;
+    height: 400px;
+    background:rgb(0, 255, 191)
 }
 @keyframes clicked{
     0%{
@@ -143,5 +337,11 @@ body{
     }
     100%{
         transform: scale(1);
+    }
+}
+
+@media (max-width:600px){
+    .welcome-page .welcome{
+       width: 90%;
     }
 }

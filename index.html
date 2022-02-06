@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slides: sliding Puzzle Game</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/61bef7b685.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="welcome-page">
@@ -22,6 +23,9 @@
     <div class="difficulty-page">
         <div class="difficulty-options">
             <div class="difficulty-instructions">
+               <button class="back">
+                <i class="fas fa-angle-left"></i>
+               </button>
                 <h2>
                     choose the difficulty
                 </h2>
@@ -42,8 +46,82 @@
             </div>
         </div>
     </div>
+    <div class="instruction-page">
+        <div class="instruction-set">
+            <div class="difficulty-instructions">
+                <button class="back">
+                 <i class="fas fa-angle-left"></i>
+                </button>
+                 <h2>
+                     Instructions
+                 </h2>
+             </div>
+        </div>
+    </div>
     <main class="game-page">
-
+        <div class="container">
+            <div class="about-corner">
+                <div class="player">
+                    <div class="player-avatar">
+                        <img src="Pictures/user-icon.png" alt="">
+                    </div>
+                        <h2 class="player-name">
+                            Player
+                        </h2>
+                </div>
+                <div class="settings">
+                    <button class="restart">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <div class="game-stat">
+                    <div id="difficulty">
+                        <div class="icon">
+                            <i class="fas fa-hand-rock"></i>
+                        </div>
+                        <div class="stat">
+                            <h2>Difficulty</h2>
+                            <h3>Easy</h3>
+                        </div>
+                    </div>
+                    <div id="timer">
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat">
+                            <h2>Timer</h2>
+                            <h3>0</h3>
+                        </div>
+                    </div>
+                    <div id="moves">
+                        <div class="icon">
+                            <i class="fas fa-hand-pointer"></i>
+                        </div>
+                        <div class="stat">
+                            <h2>Moves</h2>
+                            <h3>0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="goal">
+                   <button class="btn-goal"></button>
+                </div>
+            </div>
+            <div class="game-corner">
+                <div class="game-header">
+                    <h1>Slides</h1>
+                    <div class="shape"></div>
+                </div>
+                <div class="game-board">
+                    <div class="puzzle-board">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <script src="script.js"></script>
 </body>

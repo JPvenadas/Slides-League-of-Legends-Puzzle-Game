@@ -9,54 +9,79 @@
     <script src="https://kit.fontawesome.com/61bef7b685.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="welcome-page">
+    <div class="welcome-screen-container">
         <div class="welcome">
             <h1 class="game-title">
                Slides
             </h1>
             <h2 class="game-subtitle">A Sliding Puzzle Game</h2>
-            <button class="play-button">Play</button>
+            <button class="start-button">Play</button>
             <p>Don't know what to do?</p>
             <button class="instructions-button">Instructions</button>
         </div>
     </div>
-    <div class="difficulty-page">
-        <div class="difficulty-options">
-            <div class="difficulty-instructions">
-               <button class="back">
-                <i class="fas fa-angle-left"></i>
-               </button>
-                <h2>
-                    choose the difficulty
-                </h2>
+    <div class="options-container">
+        <div class="options-page">
+            <div class="options-top">
+                <div class="player-info-top">
+                    <button class="back back1">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <h2>Input the player name</h2>
+                   <img src="Pictures/user-icon.png" alt="">
+                   <input type="text" id="name" placeholder="(Optional)">
+                </div>
+                <div class="difficulty-top">
+                    <button class="back back2">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <h1>Choose the difficulty</h1>
+                    <div class="mode-container">
+                        <input checked type="radio" name="difficulty" id="easy-mode">
+                        <label for="easy-mode">
+                            <div>
+                                <h3>Easy</h3>
+                                <h3>3x3</h3>
+                            </div>
+                            <hr>
+                            <h6>2:00 min</h6>
+                        </label>
+                    </div>
+                    <div class="mode-container">
+                        <input type="radio" name="difficulty" id="normal-mode">
+                        <label for="normal-mode">
+                            <div>
+                                <h3>Normal</h3>
+                                <h3>4x4</h3>
+                            </div>
+                            <hr>
+                            <h6>3:30 min</h6>
+                        </label>
+                    </div>
+                    <div class="mode-container">
+                        <input type="radio" name="difficulty" id="difficult-mode">
+                        <label for="difficult-mode">
+                            <div>
+                                <h3>Difficult</h3>
+                                <h3>5x5</h3>
+                            </div>
+                           <hr>
+                            <h6>4:45 min</h6>
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div class="choices">
-                <button class="easy">
-                    <h3>Easy</h3>
-                    <p>3x3</p>
-                </button>
-                <button class="normal">
-                    <h3>Normal</h3>
-                    <p>4x4</p>
-                </button>
-                <button class="difficult">
-                    <h3>Difficult</h3>
-                    <p>5x5</p>
-                </button>
+            <div class="options-bot">
+                <div class="difficulty-bot">
+                    <button class="play">Play</button>
+                </div>
+                <div class="player-info-bot">
+                    <button class="save-name">Skip</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="instruction-page">
-        <div class="instruction-set">
-            <div class="difficulty-instructions">
-                <button class="back">
-                 <i class="fas fa-angle-left"></i>
-                </button>
-                 <h2>
-                     Instructions
-                 </h2>
-             </div>
-        </div>
+    <div class="instruction-container">
     </div>
     <main class="game-page">
         <div class="container">

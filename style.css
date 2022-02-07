@@ -13,7 +13,20 @@ body{
     height: 100vh;
     min-height: 600px;
 }
-.welcome-page{
+input[type=radio]{
+    display: none;
+}
+hr{
+    background-image: linear-gradient(to right,rgb(104, 217, 251) 0%, 
+                                               rgb(186, 219, 229) 10%,
+                                               rgb(104, 217, 251) 20%, 
+                                               rgb(104, 217, 251)100%);
+    background-size: 200%;
+    height: 10px;
+    border: none;
+    border-radius: 15px;
+}
+.welcome-screen-container{
     position: absolute;
     top: 0;
     left: 0;
@@ -24,10 +37,11 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
-    transition: ease-in-out .5s;
+    z-index: 3;
+    transition: ease-in-out .2s;
+    color:rgb(31, 127, 144);
 }
-.welcome-page .welcome{
+.welcome-screen-container .welcome{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,150 +51,217 @@ body{
     gap: 10px;
     background: rgba(255, 255, 255, 0.646);
     border-radius: 10%;
-    z-index: 2;
+    z-index: 1;
     box-shadow: 2px 2px 10px black;
 }
-.welcome-page .welcome .game-title{
+.welcome-screen-container .welcome .game-title{
     font-family: "Architects daughter";
     font-size: 6.5rem;
     font-weight: bolder;
     color: rgb(7, 255, 243);
     text-shadow: 2px 2px 10px black;
 }
-.welcome-page .welcome .play-button{
+.welcome-screen-container .welcome .start-button{
     padding: 12px 100px;
     border-radius: 10px;
     outline: none;
     border: none;
     background: rgb(12, 88, 88);
     color: white;
-    font-family: 'Architects Daughter';
     font-weight: bolder;
     font-size: 1.5rem;
     transition: ease .3s ;
 }
 
-.welcome-page .welcome .instructions-button{
+.welcome-screen-container .welcome .instructions-button{
     padding: 5px 50px;
     background: rgb(12, 88, 88);
     color: white;
-    font-family: 'Architects Daughter';
     font-size: 1rem;
     font-weight: bolder;
     border-radius: 10px;
     transition: ease .3s ;
     border: none;
 }
-.welcome-page .welcome .play-button:active,
-.welcome-page .welcome .instructions-button:active{
+.welcome-screen-container .welcome .start-button:active,
+.welcome-screen-container .welcome .instructions-button:active{
     animation: clicked .1s;
  }
-.welcome-page .welcome .play-button:hover,
-.welcome-page .welcome .instructions-button:hover{
+.welcome-screen-container .welcome .start-button:hover,
+.welcome-screen-container .welcome .instructions-button:hover{
     transform: scale(1.1);
     transition: ease .2s ;
 }
 
-.difficulty-page{
-    z-index: 2;
-    width: 100%;
-    height: 100%;
+.options-container{
+    width: 100vw;
+    height: 100vh;
     position: absolute;
+    top: -400%;
     left: 0;
-    top: -200%;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 4;
     transition: ease-in-out .5s;
 }
-.difficulty-page .difficulty-options{
-    width: 700px;
+.options-container .options-page{
+    width: 600px;
     height: 500px;
-    background: rgba(255, 255, 255, 0.876);
-    position: relative;
-    border-radius: 20px;
-    box-shadow: 2px 2px 10px black;
+    background: white;
+    border-radius: 15px;
+    display: grid;
+    flex-direction: column;
+    grid-template-rows: 1fr 90px;
+    overflow: hidden;
+   
+}
+.options-container .options-page .options-top,
+.options-container .options-page .options-bot{
+   width: auto;
+   display: flex;
+   flex-direction: row;
+  
+}
+.options-container .options-page .options-top{
+    background: white;
+    border-radius: 15px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    transition: 1s ease;
+}
+.options-container .options-page .options-top > div,
+.options-container .options-page .options-bot > div{
+    width: 100%;
+    flex-shrink: 0;
+    border: solid 1px rgb(31, 212, 212);
     
 }
-.difficulty-instructions{
-   height: 50px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background: rgb(13, 102, 102);
-   border-top-left-radius: 20px;
-   border-top-right-radius: 20px;
-   color: white;
-   position: relative;
+.options-container .options-page .options-top .player-info-top{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 20px;
+    background: linear-gradient(to right, rgb(121, 241, 235), 
+                                          rgb(103, 255, 192));
+                                        
 }
-.difficulty-instructions .back{
-    height: 100%;
-    width: 50px;
-    background: transparent;
-    color: white;
-    font-size: 2rem;
+.options-container .options-page .back{
     position: absolute;
     top: 0;
-    left: 2px;
+    left: 0;
+    width: 50px;
+    height: 50px;
     border: none;
-    outline: none;
-    transition: ease .5s;
+    background: transparent;
+    font-weight: bold;
     border-radius: 50%;
+    color:#265d51;
+    font-size: 1.2rem;
+    transition: ease .7s;
 }
-.difficulty-instructions .back:hover{
-    background-color: rgba(255, 255, 255, 0.267);
+.options-container .options-page .back:hover{
+    background: rgba(76, 247, 253, 0.493);
 }
-.difficulty-page .difficulty-options .difficulty-instructions h2{
-    font-family: 'Architects Daughter';
-    font-size: 1.5rem;
+.options-container .options-page .options-top .player-info-top h2{
+    color:rgb(12, 88, 88);
+    font-size: 1.2rem;
 }
-.difficulty-page .difficulty-options .choices{
-    height: calc(100% - 50px);
-    width: 100%;
+.options-container .options-page .options-top .player-info-top img{
+    width: 200px;
+    height: 180px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 4px gray;
+    
+}
+.options-container .options-page .options-top .player-info-top input{
+    padding: 6px 3px;
+    border-radius: 15px;
+    border: none;
+    outline-style: none;
+    text-align: center;
+    color: #265d51;
+}
+.options-container .options-page .options-top .difficulty-top{
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 30px;
-}
-.difficulty-page .difficulty-options .choices button{
-    width: 50%;
-    height: 100px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 2px 2px 5px black;
-}
-.difficulty-page .difficulty-options .choices button:active{
-    animation: clicked .2s;
-}
-.difficulty-page .difficulty-options .choices button h3{
-    font-family: 'Architects Daughter';
-    font-weight: bolder;
-    font-size: 1.8rem;
-    color: rgb(41, 79, 82);
-    text-shadow: 0px 0px 20px rgb(97, 97, 97);
-    font-weight: bolder;
-}
-.instruction-page{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    top: -200%;
-    left: 0;
-    transition: ease-in-out .5s;
-}
-.instruction-page .instruction-set{
-    width: 700px;
-    height: 500px;
-    background: linear-gradient(rgb(131, 151, 151), rgb(139, 184, 174));
+    gap: 15px;
+    color:rgb(12, 88, 88);
     position: relative;
-    border-radius: 20px;
+}
+.options-container .options-page .options-top .difficulty-top h1{
+    font-size: 1.2rem;
+}
+.options-container .options-page .options-top .difficulty-top .mode-container{
+    width: 85%;
+    height: 80px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
+    padding: 7px 9px;
+    transition: ease .2s;
+}
+.options-container .options-page .options-top .difficulty-top .mode-container:hover{
+    transform: scale(1.03);
+}
+.options-container .options-page .options-top .difficulty-top .mode-container div{
+    display: flex;
+    justify-content: space-between;
 }
 
+.options-container .options-page .options-top .difficulty-top .mode-container label{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+.options-container .options-page .options-bot{
+    width: auto;
+    transform: translateX(-100%);
+    transition: 1s ease;
+}
+.options-container .options-page .options-bot .difficulty-bot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(87, 236, 229);
+}
+.options-container .options-page .options-bot .difficulty-bot button{
+    color:rgb(42, 117, 114);
+    background-color: white;
+    font-weight: bolder;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    width: 150px;
+    border-radius: 10px;
+}
+.options-container .options-page .options-bot button:hover{
+    transform: scale(1.05);
+}
+.options-container .options-page .options-bot button:active{
+    animation: clicked .2s;
+}
+.options-container .options-page .options-bot .player-info-bot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.options-container .options-page .options-bot .player-info-bot button{
+    color:rgb(245, 245, 245);
+    background-color: rgb(35, 139, 122);
+    font-weight: bolder;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    width: 150px;
+    border-radius: 10px;
+}
 .game-page{
     width: 100%;
     height: 100%;
@@ -189,7 +270,7 @@ body{
     justify-content: center;
     align-items: center;
     background: linear-gradient(to right, rgb(0, 217, 255), rgb(0, 255, 191));
-    color: rgb(12, 84, 93);
+    color: rgb(65, 186, 202);
 }
 .game-page .container{
     width: 800px;
@@ -206,6 +287,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 2px;
+    box-shadow: 2px 2px 5px gray;
 }
 .game-page .container .about-corner .player{
     display: flex;
@@ -229,7 +311,7 @@ body{
     font-size: .8rem;
 }
 .game-page .container .about-corner .settings{
-    background: rgb(89, 198, 212);
+    background: rgb(169, 236, 245);
     color: white;
     display: flex;
     justify-content: center;
@@ -245,6 +327,7 @@ body{
     box-shadow: 2px 2px 5px gray;
     border-radius: 10px;
     transition: ease .2s;
+    color:rgb(30, 187, 207);
 }
 .game-page .container .about-corner .settings button:hover{
     transform: scale(1.1);
@@ -310,12 +393,11 @@ body{
 }
 .game-page .container .game-corner .game-header h1{
     font-family: 'Architects daughter', 'Poppins';
-   
 }
 .game-page .container .game-corner .game-header .shape{
     width: 90%;
     height: 10px;
-    background:rgb(30, 187, 207);
+    background:rgb(87, 225, 243);
     border-radius: 10px;
 }
 .game-page .container .game-corner .game-board{
@@ -341,7 +423,7 @@ body{
 }
 
 @media (max-width:600px){
-    .welcome-page .welcome{
+    .welcome-screen-container .welcome{
        width: 90%;
     }
 }

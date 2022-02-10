@@ -7,6 +7,7 @@
     list-style: none;
     text-decoration: none;
     font-family: 'Poppins', helvetica;
+    
 }
 body{
     width: 100vw;
@@ -38,7 +39,7 @@ hr{
     justify-content: center;
     align-items: center;
     z-index: 3;
-    transition: ease-in-out .2s;
+    transition: ease-in-out .8s;
     color:rgb(31, 127, 144);
 }
 .welcome-screen-container .welcome{
@@ -200,25 +201,25 @@ hr{
 }
 .options-container .options-page .options-top .difficulty-top .mode-container{
     width: 85%;
-    height: 80px;
+    height: 90px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px black;
     padding: 7px 9px;
     transition: ease .2s;
+    background: white;
+    border: none;
+    color:rgb(33, 125, 141)
+}
+.options-container .options-page .options-top 
+.difficulty-top .mode-container:active{
+    animation: clicked .1s;
 }
 .options-container .options-page .options-top .difficulty-top .mode-container:hover{
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 .options-container .options-page .options-top .difficulty-top .mode-container div{
     display: flex;
     justify-content: space-between;
-}
-
-.options-container .options-page .options-top .difficulty-top .mode-container label{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
 }
 .options-container .options-page .options-bot{
     width: auto;
@@ -230,22 +231,6 @@ hr{
     justify-content: center;
     align-items: center;
     background: rgb(87, 236, 229);
-}
-.options-container .options-page .options-bot .difficulty-bot button{
-    color:rgb(42, 117, 114);
-    background-color: white;
-    font-weight: bolder;
-    border: none;
-    padding: 5px 10px;
-    font-size: 1.2rem;
-    width: 150px;
-    border-radius: 10px;
-}
-.options-container .options-page .options-bot button:hover{
-    transform: scale(1.05);
-}
-.options-container .options-page .options-bot button:active{
-    animation: clicked .2s;
 }
 .options-container .options-page .options-bot .player-info-bot{
     display: flex;
@@ -405,20 +390,113 @@ hr{
    justify-content: center;
    align-items: center;
 }
+
 .game-page .container .game-corner .game-board .puzzle-board{
     width: 400px;
     height: 400px;
-    background:rgb(0, 255, 191)
+    background:rgb(199, 207, 205);
+    display:grid;
+}
+.game-page .container .game-corner .game-board .puzzle-board button{
+    border: none;
+    background-size: cover !important; 
+    transition: .2s ease;
+}
+.game-page .container .game-corner .game-board .puzzle-board button:not(:last-child):hover{
+    box-shadow: 0px 0px 10px black;
+}
+
+.game-page .menu-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.555);
+    display: none;
+    animation: spawn .4s;
+}
+.game-page .menu-container div{
+   
+    width: 400px;
+    height: 400px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    flex-direction: column;
+    gap: 20px
+}
+.game-page .menu-container div h1{
+    position: relative;
+    bottom: 20px;
+    font-family: 'Architects daughter';
+    font-weight: bold;
+}
+.game-page .menu-container div button{
+    width: 200px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(32, 173, 173);
+    color: white;
+    transition: ease .2s;
+}
+.game-page .menu-container div button:hover{
+    transform: scale(1.05);
+    
+}
+.game-page .menu-container div button:active{
+    animation: clicked .1s;
+}
+.game-page .goal-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; 
+    height: 100vh;
+    position: absolute;
+    top: -400%;
+    left: 0;
+    transition: .8s ease;
+    background: rgba(0, 0, 0, 0.466);
+}
+.game-page .goal-container div{
+    width: 430px;
+    height: 430px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game-page .goal-container div img{
+    width: 400px;
+    height: 400px;
+    border-radius: 15px;
+    box-shadow: 0 0 14px black;
 }
 @keyframes clicked{
     0%{
         transform: scale(1);
     }
     50%{
-        transform: scale(.9);
+        transform: scale(.95);
     }
     100%{
         transform: scale(1);
+    }
+}
+@keyframes spawn{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
     }
 }
 

@@ -349,8 +349,7 @@ hr{
 .game-page .container .about-corner .goal .btn-goal{
     width: 90px;
     height: 81px;
-    background: url(Pictures/Easy-mode/Full-img.jpg) no-repeat center;
-    background-size: cover; 
+    background-size: cover !important; 
     transition: ease .2s;  
     border: none; 
     border-radius: 5px;
@@ -396,11 +395,12 @@ hr{
     height: 400px;
     background:rgb(199, 207, 205);
     display:grid;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
 }
 .game-page .container .game-corner .game-board .puzzle-board button{
     border: none;
     background-size: cover !important; 
-    transition: .2s ease;
+    
 }
 .game-page .container .game-corner .game-board .puzzle-board button:not(:last-child):hover{
     box-shadow: 0px 0px 10px black;
@@ -418,9 +418,9 @@ hr{
     background: rgba(0, 0, 0, 0.555);
     display: none;
     animation: spawn .4s;
+    z-index: 10;
 }
 .game-page .menu-container div{
-   
     width: 400px;
     height: 400px;
     background: white;

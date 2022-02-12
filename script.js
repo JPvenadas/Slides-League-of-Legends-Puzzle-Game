@@ -1,3 +1,4 @@
+
 let start = document.querySelector('.start-button')
 let welcome = document.querySelector('.welcome-screen-container');
 let options = document.querySelector('.options-container')
@@ -17,9 +18,13 @@ let menuContainer = document.querySelector('.menu-container')
 let resume = document.getElementById('resume')
 let mainMenu = document.getElementById('menu')
 let goal = document.querySelector('.btn-goal')
+let goalIMG = document.querySelector('.goal-image')
 let goalContainer = document.querySelector('.goal-container')
 let puzzleBoard = document.querySelector('.puzzle-board')
+let restart = document.querySelector('.restart')
 
+
+const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(puzzleBoard, {stagger: 50});
 let gameLevel;
 
 start.addEventListener('click', ()=>{
@@ -41,15 +46,7 @@ secondback.addEventListener('click', ()=>{
     upperOptions.style.transform = "translateX(0)";
     lowerOptions.style.transform = "translateX(-100%)";
 })
-modes.forEach(mode =>{
-    mode.addEventListener('click', ()=>{
-        playerName2.innerText = playerName.value
-        options.style.top = "-400%";
-        setTimeout(() => {
-        welcome.style.top = "-400%"
-        }, 500);
-    })
-})
+
 menu.addEventListener('click', ()=>{
     menuContainer.style.display = "flex";
 })
@@ -70,16 +67,64 @@ easy.addEventListener('click', ()=>{
     gameLevel = "Easy"
     CreateTiles(9);
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3" "P4 P5 P6" "P7 P8 P9"'
+    setPosition(Randomizer(9))
+   
 })
 normal.addEventListener('click', ()=>{
     gameLevel = "Normal"
     CreateTiles(16)
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10" "P4 P5 P6 P11" "P7 P8 P9 P12" "P13 P14 P15 P16"'
+    setPosition(Randomizer(16))
+   
 })
 difficult.addEventListener('click', ()=>{
     gameLevel = "Difficult"
     CreateTiles(25)
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10 P17" "P4 P5 P6 P11 P18" "P7 P8 P9 P12 P19" "P13 P14 P15 P16 P20" "P21 P22 P23 P24 P25"'
+    setPosition(Randomizer(25))
+   
+})
+modes.forEach(mode =>{
+    mode.addEventListener('click', ()=>{
+        let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
+        unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
+        playerName2.innerText = playerName.value
+        goal.style.background = `url(Pictures/${gameLevel}-mode/Full-img.png) no-repeat center`
+        goalIMG.src = `/Pictures/${gameLevel}-mode/Full-img.png`
+        options.style.top = "-400%";
+        setTimeout(() => {
+        welcome.style.top = "-400%"
+        }, 500);
+        let empty = document.querySelector('.empty-tile')
+        tiles.map(clickabletiles=>{
+            clickabletiles.addEventListener('click', ()=>{
+              emptypos = trimGridArea(empty.style.getPropertyValue('grid-area'))
+              currentpos = trimGridArea(clickabletiles.style.getPropertyValue('grid-area'));
+              clickabletiles.style.setProperty("grid-area", emptypos)
+              empty.style.setProperty('grid-area',currentpos)
+              unlock(unlocklist,currentpos,tiles)
+                forceGridAnimation();
+            })
+        })
+    })
+   
+})
+restart.addEventListener('click', ()=>{
+    if(gameLevel == "Easy"){
+        setPosition(Randomizer(9))
+        
+    }
+    if(gameLevel == "Normal"){
+        setPosition(Randomizer(16))
+        
+    }
+    if(gameLevel == "Difficult"){
+        setPosition(Randomizer(25))
+    }
+    let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
+    unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
+    forceGridAnimation()
+   
 })
 let CreateTiles = (tilenumber) =>{
     puzzleBoard.innerHTML = "";
@@ -90,12 +135,77 @@ let CreateTiles = (tilenumber) =>{
     
         if(num == (tilenumber - 1)){
             tile.style.background = "transparent"
-            tile.className = "empty-tile"
+            tile.className = "empty-tile" 
         }
         else{
             tile.style.background= `url(Pictures/${gameLevel}-mode/Parts/image_${num+1}.png) no-repeat center`
+            tile.className = `button${num + 1}`
+            tile.style.gridArea = `P${num+1}`
+            tile.disabled = true
         }  
-        
     }
 }
 
+let Randomizer = (num) =>{
+    let array = []
+    while(array.length < num){
+        let randomNum = Math.floor((Math.random() * num)+ 1);
+       if(array.includes(randomNum)){
+       }
+       else{
+           array.push(randomNum);
+       }
+    }
+    return array
+}
+
+let setPosition = (Randomnumbers) =>{
+    for(let num=1; num < Randomnumbers.length; num++){
+       document.querySelector(`.button${num}`).style.gridArea = `P${Randomnumbers[num-1]}`
+    }
+        document.querySelector('.empty-tile').style.gridArea = `P${Randomnumbers[Randomnumbers.length -1]}`
+}
+let unlocklist = {
+    P1: ['P2', 'P4'],
+    P2: ['P1', 'P3', 'P5'],
+    P3: ['P2', 'P6', 'P10'],
+    P4: ['P1', 'P5', 'P7'],
+    P5: ['P2', 'P4', 'P6', 'P8'],
+    P6: ['P3', 'P5', 'P9', 'P11'],
+    P7: ['P4', 'P8', 'P13'],
+    P8: ['P5', 'P7', 'P9', 'P14'],
+    P9: ['P6', 'P8', 'P12', 'P15'],
+    P10: ['P3', 'P11', 'P17'],
+    P11: ['P6', 'P10', 'P12', 'P18'],
+    P12: ['P11', 'P9', 'P16', 'P19'],
+    P13: ['P7', 'P14', 'P21'],
+    P14: ['P8', 'P13', 'P15', 'P22'],
+    P15: ['P9', 'P14', 'P16', 'P23'],
+    P16: ['P12', 'P15', 'P20', 'P24'],
+    P17: ['P10', 'P18'],
+    P18: ['P11', 'P17', 'P19'],
+    P19: ['P12', 'P18', 'P20'],
+    P20: ['P19', 'P16', 'P25'],
+    P21: ['P13', 'P22'],
+    P22: ['P14', 'P21', 'P23'],
+    P23: ['P15', 'P22', 'P24'],
+    P24: ['P16', 'P23', 'P25'],
+    P25: ['P20', 'P24']
+}
+let unlock = (list, emptyposition, tiles) =>{
+    let unlockable = list[emptyposition]
+    tiles.forEach(tile =>{
+        if(unlockable.includes(trimGridArea(tile.style.getPropertyValue('grid-area')))){
+            tile.disabled = false
+        }
+        else{
+            tile.disabled = true
+        }
+    })
+}
+ 
+let trimGridArea = (GridPositionstring) =>{
+    let regex = /[P][0-9]+/
+    let result = GridPositionstring.match(regex)
+    return result[0]
+}

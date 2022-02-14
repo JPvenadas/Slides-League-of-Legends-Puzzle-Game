@@ -1,4 +1,4 @@
-
+// these are the html elements that the javascript will be using
 let start = document.querySelector('.start-button')
 let welcome = document.querySelector('.welcome-screen-container');
 let options = document.querySelector('.options-container')
@@ -22,10 +22,16 @@ let goalIMG = document.querySelector('.goal-image')
 let goalContainer = document.querySelector('.goal-container')
 let puzzleBoard = document.querySelector('.puzzle-board')
 let restart = document.querySelector('.restart')
+let moves = document.getElementById('total-moves')
+let difficulty = document.getElementById('game-level')
+let Duration = document.getElementById('Time-left')
 
-
+//set up the animation of the Grid (this is a tool for animating your Grid elements, I use this because css transition dont work on grid)
 const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(puzzleBoard, {stagger: 50});
+
+//variables that will be used
 let gameLevel;
+let TotalMoves = 0
 
 start.addEventListener('click', ()=>{
     options.style.top = "0"
@@ -88,13 +94,7 @@ modes.forEach(mode =>{
     mode.addEventListener('click', ()=>{
         let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
         unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
-        playerName2.innerText = playerName.value
-        goal.style.background = `url(Pictures/${gameLevel}-mode/Full-img.png) no-repeat center`
-        goalIMG.src = `Pictures/${gameLevel}-mode/Full-img.png`
-        options.style.top = "-400%";
-        setTimeout(() => {
-        welcome.style.top = "-400%"
-        }, 500);
+        setUpGame()
         let empty = document.querySelector('.empty-tile')
         tiles.map(clickabletiles=>{
             clickabletiles.addEventListener('click', ()=>{
@@ -103,7 +103,8 @@ modes.forEach(mode =>{
               clickabletiles.style.setProperty("grid-area", emptypos)
               empty.style.setProperty('grid-area',currentpos)
               unlock(unlocklist,currentpos,tiles)
-                forceGridAnimation();
+              forceGridAnimation();
+              ChangeMoves("add")
             })
         })
     })
@@ -124,7 +125,7 @@ restart.addEventListener('click', ()=>{
     let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
     unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
     forceGridAnimation()
-   
+   ChangeMoves("reset")
 })
 let CreateTiles = (tilenumber) =>{
     puzzleBoard.innerHTML = "";
@@ -242,13 +243,39 @@ function inversionchecker(array){
            }
        }
     }
-    console.log(inversions)
     return oddOrEven(inversions)
 }
 function oddOrEven(num){
     let remainder = num % 2 
     return remainder
 }
-
-console.log(inversionchecker([9,1,2,3,4,5,6,7,8]))
- 
+function ChangeMoves(command){
+   if(command == "add"){
+    TotalMoves++
+   
+   }
+   if(command == "reset"){
+    TotalMoves = 0
+   }
+   moves.innerText = TotalMoves
+}
+function setUpGame(){
+        playerName2.innerText = playerName.value
+        goal.style.background = `url(Pictures/${gameLevel}-mode/Full-img.png) no-repeat center`
+        goalIMG.src = `Pictures/${gameLevel}-mode/Full-img.png`
+        options.style.top = "-400%";
+        setTimeout(() => {
+        welcome.style.top = "-400%"
+        }, 500); 
+        difficulty.innerText = gameLevel
+        ChangeMoves("reset")
+}
+function setTimer(time){
+    setInterval(() => {
+       Duration.innerText = time
+       if(time == 0){
+        return
+       }
+       time--
+    }, 1000);
+}

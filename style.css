@@ -272,7 +272,7 @@ hr{
     color: white;
     font-size: 6rem;
     font-weight: bold;
-    font-family: "Poppins", Helvetuca;
+    font-family: "Poppins", Helvetica;
 }
 .game-page .container{
     width: 800px;
@@ -498,6 +498,9 @@ hr{
     border-radius: 15px;
     box-shadow: 0 0 14px black;
 }
+.enlarge{
+    animation: enlarge 1s;
+}
 @keyframes clicked{
     0%{
         transform: scale(1);
@@ -521,6 +524,10 @@ hr{
     0%{
         transform: scale(1);
         opacity: 1;
+    }
+    80%{
+        transform: scale(1.4);
+        opacity: .1;
     }
     100%{
         transform:  scale(1.4);

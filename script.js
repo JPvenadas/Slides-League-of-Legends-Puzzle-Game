@@ -25,6 +25,8 @@ let restart = document.querySelector('.restart')
 let moves = document.getElementById('total-moves')
 let difficulty = document.getElementById('game-level')
 let Duration = document.getElementById('Time-left')
+let cdownContainer = document.querySelector('.countdown-container')
+let countdown = document.querySelector('.countdown')
 
 //set up the animation of the Grid (this is a tool for animating your Grid elements, I use this because css transition dont work on grid)
 const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(puzzleBoard, {stagger: 50});
@@ -32,6 +34,7 @@ const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(puzzleBoard, 
 //variables that will be used
 let gameLevel;
 let TotalMoves = 0
+
 
 start.addEventListener('click', ()=>{
     options.style.top = "0"
@@ -92,6 +95,7 @@ difficult.addEventListener('click', ()=>{
 })
 modes.forEach(mode =>{
     mode.addEventListener('click', ()=>{
+        startCountdown(3)
         let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
         unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
         setUpGame()
@@ -270,12 +274,27 @@ function setUpGame(){
         difficulty.innerText = gameLevel
         ChangeMoves("reset")
 }
-function setTimer(time){
-    setInterval(() => {
-       Duration.innerText = time
-       if(time == 0){
-        return
-       }
-       time--
-    }, 1000);
+
+function startCountdown(count){
+        countdown.innerText = "3"
+        cdownContainer.style.display = "flex"
+        let startCountdown =setInterval(() => {
+            if(count < 0){
+                cdownContainer.style.display = "none"
+                clearInterval(startCountdown)
+            }
+            
+            countdown.innerText = count
+            count--
+            countdown.classList.remove("enlarge")
+            countdown.offsetWidth
+            countdown.classList.add("enlarge")
+        }, 1000);
 }
+
+function startTimer(time){
+    let minutes = Math.floor(time/60)
+    let seconds = time % 60
+    console.log(`${minutes}, ${seconds}`)
+}
+startTimer(120)

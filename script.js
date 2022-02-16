@@ -34,6 +34,8 @@ const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(puzzleBoard, 
 //variables that will be used
 let gameLevel;
 let TotalMoves = 0
+let time;
+let timerActive;
 
 
 start.addEventListener('click', ()=>{
@@ -58,9 +60,12 @@ secondback.addEventListener('click', ()=>{
 
 menu.addEventListener('click', ()=>{
     menuContainer.style.display = "flex";
+    clearInterval(timerActive)
+    
 })
 resume.addEventListener('click', ()=>{
     menuContainer.style.display = "none"
+    timerActive = activateTimer()
 })
 mainMenu.addEventListener('click', ()=>{
     welcome.style.top = "0";
@@ -77,6 +82,8 @@ easy.addEventListener('click', ()=>{
     CreateTiles(9);
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3" "P4 P5 P6" "P7 P8 P9"'
     setPosition(solvablearray(9))
+    time = 120
+   
    
 })
 normal.addEventListener('click', ()=>{
@@ -84,6 +91,7 @@ normal.addEventListener('click', ()=>{
     CreateTiles(16)
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10" "P4 P5 P6 P11" "P7 P8 P9 P12" "P13 P14 P15 P16"'
     setPosition(solvablearray(16))
+    time = 210
    
 })
 difficult.addEventListener('click', ()=>{
@@ -91,11 +99,13 @@ difficult.addEventListener('click', ()=>{
     CreateTiles(25)
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10 P17" "P4 P5 P6 P11 P18" "P7 P8 P9 P12 P19" "P13 P14 P15 P16 P20" "P21 P22 P23 P24 P25"'
     setPosition(solvablearray(25))
+    time = 285
    
 })
 modes.forEach(mode =>{
     mode.addEventListener('click', ()=>{
         startCountdown(3)
+        
         let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
         unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
         setUpGame()
@@ -117,19 +127,24 @@ modes.forEach(mode =>{
 restart.addEventListener('click', ()=>{
     if(gameLevel == "Easy"){
         setPosition(solvablearray(9))
+        time = 120
         
     }
     if(gameLevel == "Normal"){
         setPosition(solvablearray(16))
+        time = 210
         
     }
     if(gameLevel == "Difficult"){
         setPosition(solvablearray(25))
+        time = 285
     }
+    clearInterval(timerActive)
+    timerActive = activateTimer()
     let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
     unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
     forceGridAnimation()
-   ChangeMoves("reset")
+    ChangeMoves("reset")
 })
 let CreateTiles = (tilenumber) =>{
     puzzleBoard.innerHTML = "";
@@ -290,11 +305,20 @@ function startCountdown(count){
             countdown.offsetWidth
             countdown.classList.add("enlarge")
         }, 1000);
+        setTimeout(() => {
+            timerActive = activateTimer()
+        }, 4000);
+}
+let = activateTimer = () =>{
+    function changeText_time(){
+        let minutes = Math.floor(time/60)
+        let seconds = time % 60
+        seconds = seconds < 10? '0' + seconds: seconds;
+        minutes = minutes < 10? '0' + minutes: minutes; 
+        Duration.innerText = `${minutes}:${seconds}`
+        time--
+    }
+    let timer =  setInterval(changeText_time, 1000)
+    return timer
 }
 
-function startTimer(time){
-    let minutes = Math.floor(time/60)
-    let seconds = time % 60
-    console.log(`${minutes}, ${seconds}`)
-}
-startTimer(120)

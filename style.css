@@ -416,7 +416,7 @@ hr{
 }
 .game-page .container .game-corner .game-board .puzzle-board button{
     border: none;
-    background-size: cover !important; 
+    background-size: 400px!important;  
     
 }
 .game-page .container .game-corner .game-board .puzzle-board button:not(:last-child):hover{

@@ -105,7 +105,6 @@ difficult.addEventListener('click', ()=>{
 modes.forEach(mode =>{
     mode.addEventListener('click', ()=>{
         startCountdown(3)
-        
         let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
         unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
         setUpGame()
@@ -139,14 +138,25 @@ restart.addEventListener('click', ()=>{
         setPosition(solvablearray(25))
         time = 285
     }
-    clearInterval(timerActive)
-    timerActive = activateTimer()
+   
     let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
     unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
     forceGridAnimation()
     ChangeMoves("reset")
 })
 let CreateTiles = (tilenumber) =>{
+    let easyPos = [[0,0],[-133,0],[-266,0],
+                   [0,-133],[-133,-133],[-266,-133],
+                   [0,-266],[-133,-266]]
+    let normalPos =  [[0.0],[-100,0],[-200,0],[-300,0],
+                   [0,-100],[-100,-100],[-200,-100],[-300,-100],
+                   [0,-200],[-100,-200],[-200,-200],[-300,-200],
+                   [0,-300],[-100,-300],[-200,-300]]
+    let hardPos = [[0,0],[-80,0],[-160,0],[-240,0],[-320,0],
+                   [0,-80],[-80,-80],[-160,-80],[-240,-80],[-320,-80],
+                   [0,-160],[-80,-160],[-160,-160],[-240,-160],[-320,-160],
+                   [0,-240],[-80,-240],[-160,-240],[-240,-240],[-320,-240],
+                   [0,-320],[-80,-320],[-160,-320],[-240,-320]]
     puzzleBoard.innerHTML = "";
     for(let num= 0; num < tilenumber; num++){
         let tile = document.createElement("button")
@@ -157,9 +167,12 @@ let CreateTiles = (tilenumber) =>{
             tile.style.background = "transparent"
             tile.className = "empty-tile" 
         }
-        else{
-            tile.style.background= `url(Pictures/${gameLevel}-mode/Parts/image_${num+1}.png) no-repeat center`
+        else{ tile.style.background= `url(Pictures/${gameLevel}.png)`
             tile.className = `button${num + 1}`
+            gameLevel == "Easy"?  tile.style.backgroundPosition = `${easyPos[num][0]}px ${easyPos[num][1]}px`:
+            gameLevel == "Normal"? tile.style.backgroundPosition = `${normalPos[num][0]}px ${normalPos[num][1]}px`:
+            gameLevel == "Difficult"? tile.style.backgroundPosition = `${hardPos[num][0]}px ${hardPos[num][1]}px`:
+            console.log(`${hardPos[num][0]}px ${hardPos[num][1]}px`)
             tile.style.gridArea = `P${num+1}`
             tile.disabled = true
         }  
@@ -280,8 +293,8 @@ function ChangeMoves(command){
 }
 function setUpGame(){
         playerName2.innerText = playerName.value
-        goal.style.background = `url(Pictures/${gameLevel}-mode/Full-img.png) no-repeat center`
-        goalIMG.src = `Pictures/${gameLevel}-mode/Full-img.png`
+        goal.style.background = `url(Pictures/${gameLevel}.png) no-repeat center`
+        goalIMG.src = `Pictures/${gameLevel}.png`
         options.style.top = "-400%";
         setTimeout(() => {
         welcome.style.top = "-400%"

@@ -91,7 +91,7 @@ normal.addEventListener('click', ()=>{
     gameLevel = "Normal"
     CreateTiles(16)
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10" "P4 P5 P6 P11" "P7 P8 P9 P12" "P13 P14 P15 P16"'
-    setPosition(solvablearray(16))
+    setPosition(solvablearray16())
     time = 210
    
 })
@@ -131,7 +131,7 @@ restart.addEventListener('click', ()=>{
         
     }
     if(gameLevel == "Normal"){
-        setPosition(solvablearray(16))
+        setPosition(solvablearray16())
         time = 210
         
     }
@@ -191,6 +191,7 @@ let Randomizer = (num) =>{
            array.push(randomNum);
        }
     }
+    console.log(array)
    return array
 }
 
@@ -245,8 +246,21 @@ let unlock = (list, emptyposition, tiles) =>{
         do{
             random = Randomizer(num)
             inversionsStatus = inversionchecker(random)
-        }while(numstatus === inversionsStatus || numstatus == inversionsStatus)
+        }while(numstatus === inversionsStatus)
+        console.log(random)
         return random
+ }
+ let solvablearray16 = () =>{
+       let inversionsStatus
+       let emptyPlace
+       let random
+       let evenpos = [1,2,3,10,7,8,9,12]
+       do{
+            random = Randomizer(16)
+            evenpos.includes(random[15])? emptyPlace = "even": emptyPlace = "odd"
+            inversionsStatus = inversionchecker(random)
+       }while((emptyPlace == "even" && inversionsStatus == 0) || (emptyPlace =="odd" && inversionsStatus == 1))
+       return random
  }
 let trimGridArea = (GridPositionstring) =>{
     let regex = /[P][0-9]+/
@@ -277,6 +291,7 @@ function inversionchecker(array){
            }
        }
     }
+    
     return oddOrEven(inversions)
 }
 function oddOrEven(num){

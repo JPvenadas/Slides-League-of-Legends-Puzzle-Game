@@ -16,7 +16,7 @@ let modes = document.querySelectorAll('.mode-container')
 let menu = document.querySelector('.Menu')
 let menuContainer = document.querySelector('.menu-container')
 let resume = document.getElementById('resume')
-let mainMenu = document.getElementById('menu')
+let mainMenu = document.querySelectorAll('.menu')
 let goal = document.querySelector('.btn-goal')
 let goalIMG = document.querySelector('.goal-image')
 let goalContainer = document.querySelector('.goal-container')
@@ -27,6 +27,10 @@ let difficulty = document.getElementById('game-level')
 let Duration = document.getElementById('Time-left')
 let cdownContainer = document.querySelector('.countdown-container')
 let countdown = document.querySelector('.countdown')
+let resultContainer = document.querySelector('.result-container')
+let resultstring = document.querySelector('.Result')
+let Resultpic = document.querySelector('.user-pic')
+let playagain = document.querySelector('.replay')
 
 //set up the animation of the Grid (this is a tool for animating your Grid elements, I use this because css transition dont work on grid)
 const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(puzzleBoard, {stagger: 50});
@@ -36,8 +40,11 @@ let gameLevel;
 let TotalMoves = 0
 let time;
 let timerActive;
+let timer
 let chosenPic
-
+let easyArrange = [1,2,3,4,5,6,7,8,9]
+let NormalArrange = [1,2,3,10,4,5,6,11,7,8,9,12,13,14,15,16]
+let difficultArrange = [1,2,3,10,17,4,5,6,11,18,7,8,9,12,19,13,14,15,16,20,21,22,23,24,25]
 
 start.addEventListener('click', ()=>{
     options.style.top = "0"
@@ -54,6 +61,11 @@ btnSave.addEventListener('click', ()=>{
     upperOptions.style.transform = "translateX(-100%)";
     lowerOptions.style.transform = "translateX(0)";
 })
+playerName.addEventListener('keydown', ()=>{
+    playerName.classList.remove("pop")
+    playerName.offsetWidth
+    playerName.classList.add('pop')
+})
 secondback.addEventListener('click', ()=>{
     upperOptions.style.transform = "translateX(0)";
     lowerOptions.style.transform = "translateX(-100%)";
@@ -68,59 +80,32 @@ resume.addEventListener('click', ()=>{
     menuContainer.style.display = "none"
     timerActive = activateTimer()
 })
-mainMenu.addEventListener('click', ()=>{
-    welcome.style.top = "0";
-    menuContainer.style.display = "none"
+Array.from(mainMenu).map(individualmenu=>{
+    individualmenu.addEventListener('click', ()=>{
+        welcome.style.top = "0";
+        menuContainer.style.display = "none"
+        resultContainer.style.display = "none"
+    })
 })
 goal.addEventListener('click', ()=>{
     goalContainer.style.top = "0"
+   goalContainer.style.zIndex = "10"
 })
 goalContainer.addEventListener('click', ()=>{
     goalContainer.style.top = "-400%"
 })
 easy.addEventListener('click', ()=>{
-    gameLevel = "Easy"
-    CreateTiles(9);
-    puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3" "P4 P5 P6" "P7 P8 P9"'
-    setPosition(solvablearray(9))
-    time = 120
-   
-   
+    GameFormat("Easy")
 })
 normal.addEventListener('click', ()=>{
-    gameLevel = "Normal"
-    CreateTiles(16)
-    puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10" "P4 P5 P6 P11" "P7 P8 P9 P12" "P13 P14 P15 P16"'
-    setPosition(solvablearray16())
-    time = 210
-   
+    GameFormat("Normal")
 })
 difficult.addEventListener('click', ()=>{
-    gameLevel = "Difficult"
-    CreateTiles(25)
-    puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10 P17" "P4 P5 P6 P11 P18" "P7 P8 P9 P12 P19" "P13 P14 P15 P16 P20" "P21 P22 P23 P24 P25"'
-    setPosition(solvablearray(25))
-    time = 285
-   
+    GameFormat("Difficult")
 })
 modes.forEach(mode =>{
     mode.addEventListener('click', ()=>{
-        startCountdown(3)
-        let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
-        unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
-        setUpGame()
-        let empty = document.querySelector('.empty-tile')
-        tiles.map(clickabletiles=>{
-            clickabletiles.addEventListener('click', ()=>{
-              emptypos = trimGridArea(empty.style.getPropertyValue('grid-area'))
-              currentpos = trimGridArea(clickabletiles.style.getPropertyValue('grid-area'));
-              clickabletiles.style.setProperty("grid-area", emptypos)
-              empty.style.setProperty('grid-area',currentpos)
-              unlock(unlocklist,currentpos,tiles)
-              forceGridAnimation();
-              ChangeMoves("add")
-            })
-        })
+       setupGame()
     })
    
 })
@@ -140,11 +125,35 @@ restart.addEventListener('click', ()=>{
         time = 285
     }
    
-    let tiles = Array.from(puzzleBoard.querySelectorAll('button'))
-    unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), tiles)
+    
+    unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), buttons)
     forceGridAnimation()
     ChangeMoves("reset")
 })
+let GameFormat = (level) =>{
+   if(level === "Easy"){
+     gameLevel = "Easy"
+     CreateTiles(9)
+     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3" "P4 P5 P6" "P7 P8 P9"'
+     setPosition(solvablearray(9))
+     time = 120
+   }
+   else if(level === "Normal"){
+    gameLevel = "Normal"
+    CreateTiles(16)
+    puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10" "P4 P5 P6 P11" "P7 P8 P9 P12" "P13 P14 P15 P16"'
+    setPosition(solvablearray16())
+    time = 210
+   }
+   else if(level === "Difficult"){
+    gameLevel = "Difficult"
+    CreateTiles(25)
+    puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10 P17" "P4 P5 P6 P11 P18" "P7 P8 P9 P12 P19" "P13 P14 P15 P16 P20" "P21 P22 P23 P24 P25"'
+    setPosition(solvablearray(25))
+    time = 285
+   }
+   forceGridAnimation()
+}
 let CreateTiles = (tilenumber) =>{
     let easyPos = [[0,0],[-133,0],[-266,0],
                    [0,-133],[-133,-133],[-266,-133],
@@ -159,7 +168,7 @@ let CreateTiles = (tilenumber) =>{
                    [0,-240],[-80,-240],[-160,-240],[-240,-240],[-320,-240],
                    [0,-320],[-80,-320],[-160,-320],[-240,-320]]
     puzzleBoard.innerHTML = "";
-    chosenPic = `Pictures/Puzzle_Pics/${Math.floor(Math.random() * 21) + 1}.png`
+    chosenPic = `Pictures/Puzzle_Pics/${Math.floor(Math.random() * 26) + 1}.png`
     for(let num= 0; num < tilenumber; num++){
         let tile = document.createElement("button")
         puzzleBoard.appendChild(tile)
@@ -191,7 +200,6 @@ let Randomizer = (num) =>{
            array.push(randomNum);
        }
     }
-    console.log(array)
    return array
 }
 
@@ -247,7 +255,6 @@ let unlock = (list, emptyposition, tiles) =>{
             random = Randomizer(num)
             inversionsStatus = inversionchecker(random)
         }while(numstatus === inversionsStatus)
-        console.log(random)
         return random
  }
  let solvablearray16 = () =>{
@@ -270,8 +277,6 @@ let trimGridArea = (GridPositionstring) =>{
 
 function inversionchecker(array){
     let inversions= 0;
-    let NormalArrange = [1,2,3,10,4,5,6,11,7,8,9,12,13,14,15,16]
-    let difficultArrange = [1,2,3,10,17,4,5,6,11,18,7,8,9,12,19,13,14,15,16,20,21,22,23,24,25]
     for(let num1 = 0; num1< (array.length-1); num1++){
        for(let num2 = (num1+1); num2 < (array.length-1); num2++){
            if(array.length == 9){
@@ -308,7 +313,26 @@ function ChangeMoves(command){
    }
    moves.innerText = TotalMoves
 }
-function setUpGame(){
+function setupGame(){
+    startCountdown(3)
+    buttons = Array.from(puzzleBoard.querySelectorAll('button'))
+    unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), buttons)
+    setupField()
+    let empty = document.querySelector('.empty-tile')
+    buttons.map(clickabletiles=>{
+        clickabletiles.addEventListener('click', ()=>{
+          emptypos = trimGridArea(empty.style.getPropertyValue('grid-area'))
+          currentpos = trimGridArea(clickabletiles.style.getPropertyValue('grid-area'));
+          clickabletiles.style.setProperty("grid-area", emptypos)
+          empty.style.setProperty('grid-area',currentpos)
+          unlock(unlocklist,currentpos,buttons)
+          forceGridAnimation();
+          ChangeMoves("add")
+          checkSuccess()
+        })
+    })
+}
+function setupField(){
         playerName2.innerText = playerName.value
         goal.style.background = `url(${chosenPic})`
         goalIMG.src = chosenPic
@@ -347,8 +371,52 @@ let = activateTimer = () =>{
         minutes = minutes < 10? '0' + minutes: minutes; 
         Duration.innerText = `${minutes}:${seconds}`
         time--
+        if(time < 0){
+           clearInterval(timer)
+          resultContainer.style.display = "flex"
+          resultContainer.style.animation = "spawn 1s"
+           buttons.forEach(button=>{
+            button.Disbled = true
+            resultstring.innerText = "Failed!"
+            Resultpic.style.background = "url(Pictures/user-sad.png)"
+         })
+        }
     }
-    let timer =  setInterval(changeText_time, 1000)
+    timer =  setInterval(changeText_time, 1000)
     return timer
 }
 
+let checkSuccess = ()=>{
+    let CorrectPosNo = 0;
+    let CorrectPos;
+    gameLevel == "Easy"? CorrectPos = easyArrange:
+    gameLevel == "Normal"? CorrectPos = NormalArrange: CorrectPos = difficultArrange 
+    for(let num = 0; num < buttons.length; num++){
+        if(trimGridArea(buttons[num].style.getPropertyValue('grid-area')) == `P${CorrectPos[num]}`){
+            CorrectPosNo++
+        }
+    }
+    if(CorrectPosNo == buttons.length){
+        let lastTile =  buttons[buttons.length - 1]
+        clearInterval(timer)
+        lastTile.style.background = buttons[1].style.background
+         gameLevel == "Easy"? lastTile.style.backgroundPosition = "-266px -266px":
+         gameLevel == "Normal"? lastTile.style.backgroundPosition = "-300px -300px":
+         lastTile.style.backgroundPosition = "-320px -320px"
+         lastTile.style.animation =  "spawn 2s"
+         lastTile.style.display = "none"
+         lastTile.style.display = "block"
+         resultContainer.style.display = "flex"
+         buttons.forEach(button=>{
+            button.Disbled = true
+         })
+    }
+}
+playagain.addEventListener('click', ()=>{
+    puzzleBoard.html = ""
+    gameLevel == "Easy"? GameFormat("Easy"):
+    gameLevel == "Normal"? GameFormat("Normal"):
+    GameFormat("Difficult")
+    resultContainer.style.display = "none"
+    setupGame()
+})

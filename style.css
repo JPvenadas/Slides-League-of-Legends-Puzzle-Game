@@ -43,6 +43,7 @@ hr{
     transition: ease-in-out .8s;
     color:rgb(177, 108, 43);
     font-size: .8rem;
+    animation: spawn 1s;
 }
 .welcome-screen-container .welcome{
     display: flex;
@@ -77,6 +78,7 @@ hr{
     font-weight: bolder;
     font-size: 1.5rem;
     transition: ease .3s ;
+   
 }
 
 .welcome-screen-container .welcome .instructions-button{
@@ -187,7 +189,11 @@ hr{
     outline-style: none;
     text-align: center;
     color: rgb(102, 66, 13);
-    border: 1px solid rgb(104, 70, 31)
+    border: 1px solid rgb(104, 70, 31);
+    transition: .2s ease;
+}
+.options-container .options-page .options-top .player-info-top input:hover{
+    transform: scale(1.03);
 }
 .options-container .options-page .options-top .difficulty-top{
     display: flex;
@@ -251,6 +257,12 @@ hr{
     width: 150px;
     border-radius: 10px;
 }
+.options-container .options-page .options-bot .player-info-bot button:hover{
+    transform: scale(1.05)
+}
+.options-container .options-page .options-bot .player-info-bot button:active{
+    animation: clicked .1s;
+}
 .game-page{
     width: 100%;
     height: 100%;
@@ -258,14 +270,15 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url(Pictures/Background2.jpg) no-repeat center;
+    background: linear-gradient(to right, rgb(18, 153, 177), rgb(97, 230, 235));
     background-position: cover;
     color: rgb(65, 186, 202);
+    animation: spawn 3s;
 }
 .game-page .countdown-container{
     width: 100%;
     height: 100%;
-    background :rgba(0, 0, 0, 0.466);
+    background :rgba(0, 0, 0, 0.766);
     position: absolute;
     top: 0;
     left: 0;
@@ -278,6 +291,52 @@ hr{
     font-size: 6rem;
     font-weight: bold;
     font-family: "Poppins", Helvetica;
+}
+.game-page .result-container{
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.787);
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    transition: ease 1s;
+    animation: spawn-delay 3s;
+}
+.game-page .result-container .result{
+    width: 500px;
+    height: 400px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    flex-direction: column;
+    position: relative;
+}
+.game-page .result-container .result .user-pic{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-image: url(Pictures/user-icon.png);
+    background-size: 100% !important;
+}
+
+.game-page .result-container .result .result-buttons button{
+    background: white;
+    padding: 10px 40px;
+    border: none;
+    background: #49aa95;
+    color: white;
+    font-weight: bolder;
+    border-radius: 7px;
+    transition: ease .1s;
+}
+.game-page .result-container .result .result-buttons button:hover{
+    transform: scale(1.1);
+}
+.game-page .result-container .result .result-buttons button:active{
+    animation: clicked .1s;
 }
 .game-page .container{
     width: 800px;
@@ -506,6 +565,9 @@ hr{
 .enlarge{
     animation: enlarge 1s;
 }
+.pop{
+    animation: pop .5s;
+}
 @keyframes clicked{
     0%{
         transform: scale(1);
@@ -519,6 +581,17 @@ hr{
 }
 @keyframes spawn{
     0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes spawn-delay{
+    0%{
+        opacity: 0;
+    }
+    60%{
         opacity: 0;
     }
     100%{
@@ -539,7 +612,17 @@ hr{
         opacity: 0;
     }
 }
-
+@keyframes pop{
+    0%{
+        transform: scale(1)
+    }
+    50%{
+        transform: scale(1.05);
+    }
+    0%{
+        transform: scale(1);
+    }
+}
 @media (max-width:600px){
     .welcome-screen-container .welcome{
        width: 90%;

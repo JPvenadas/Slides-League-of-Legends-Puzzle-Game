@@ -206,7 +206,7 @@ let CreateTiles = (tilenumber) =>{
                    [0,-240],[-80,-240],[-160,-240],[-240,-240],[-320,-240],
                    [0,-320],[-80,-320],[-160,-320],[-240,-320]]
     puzzleBoard.innerHTML = "";
-    chosenPic = `Pictures/Puzzle_Pics/${Math.floor(Math.random() * 26) + 1}.png`
+    chosenPic = `Pictures/Puzzle_Pics/${Math.floor(Math.random() * 26) + 1}.jpg`
     for(let num= 0; num < tilenumber; num++){
         let tile = document.createElement("button")
         puzzleBoard.appendChild(tile)

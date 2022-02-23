@@ -757,6 +757,7 @@ hr{
     .game-page .container{
        grid-template-columns: none;
        grid-template-rows: 1fr 5fr;
+       width: 95%;
     }
     .game-page .container .about-corner{
        flex-direction: row;
@@ -771,5 +772,31 @@ hr{
     .game-page .container .game-corner .game-board .puzzle-board{
         width: 300px;
         height: 300px;
+    }
+    .game-page .container .about-corner .game-stat{
+        position: absolute;
+        top:70px;
+        left: 0;
+        width: 100vw;
+        flex-direction: row;
+        background: white;
+    }
+    .game-page .container .about-corner .player{
+        position: absolute;
+        top:0;
+        left: 0;
+        background:rgb(12, 88, 88);
+        flex-direction: row;
+        width: 100vw;
+        height:70px;
+        justify-content: flex-start;
+    }
+    .game-page .container .about-corner .player .player-avatar{
+        width: 70px;
+        height: 70px;
+    }
+    .game-page .container .about-corner .player .player-avatar img{
+        width: 50px;
+        height: 50px;
     }
 }

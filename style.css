@@ -10,8 +10,8 @@
     
 }
 body{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     min-height: 600px;
 }
 input[type=radio]{
@@ -31,8 +31,8 @@ hr{
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background-color: linear-gradient(to right, rgb(42, 143, 80), rgb(179, 148, 49));
     background: url(Pictures/Background.jpg) no-repeat center;
     background-size: cover;
@@ -103,9 +103,9 @@ hr{
 
 .options-container{
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     position: absolute;
-    top: -400%;
+    top: -200%;
     left: 0;
     display: flex;
     justify-content: center;
@@ -137,7 +137,7 @@ hr{
     width: auto;
     display: flex;
     flex-direction: row;
-    transition: 1s ease;
+    transition: .75s ease;
 }
 .options-container .options-page .options-top > div,
 .options-container .options-page .options-bot > div{
@@ -166,7 +166,7 @@ hr{
     border-radius: 50%;
     color:#265d51;
     font-size: 1.2rem;
-    transition: ease .7s;
+    transition: ease .6s;
 }
 .options-container .options-page .back:hover{
     background: rgba(76, 247, 253, 0.493);
@@ -232,7 +232,7 @@ hr{
 .options-container .options-page .options-bot{
     width: auto;
     transform: translateX(-100%);
-    transition: 1s ease;
+    transition: .75s ease;
 }
 .options-container .options-page .options-bot .difficulty-bot{
     display: flex;
@@ -256,6 +256,7 @@ hr{
     font-size: 1.2rem;
     width: 150px;
     border-radius: 10px;
+    transition: ease .1s;
 }
 .options-container .options-page .options-bot .player-info-bot button:hover{
     transform: scale(1.05)
@@ -263,6 +264,85 @@ hr{
 .options-container .options-page .options-bot .player-info-bot button:active{
     animation: clicked .1s;
 }
+.instruction-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: -300%;
+    left: 0;
+    z-index: 10;
+    transition: ease .5s;
+}
+.instruction-container .instructions{
+    background: white;
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+    width: 700px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+.instruction-container .instructions .instructions-bot, 
+.instruction-container .instructions .instructions-top{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    transition: ease .6s;
+}
+.instruction-container .instructions .instructions-bot div,
+.instruction-container .instructions .instructions-top div{
+    width: 100%;
+    flex-shrink: 0;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    text-align: center;
+}
+
+.instruction-container .instructions .instructions-bot{
+    transform: translateX(-400%);
+    color: white
+}
+
+.instruction-container .instructions button{
+    background: transparent;
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 15px;
+    z-index: 10;
+}
+.instruction-container .instructions button:hover{
+    transform: scale(1.05);
+}
+.instruction-container .instructions button:active{
+    animation: clicked 0.1s;
+}
+.instruction-container .instructions .instruction-back{
+    width: 100px;
+    height: 40px;
+    background: white;
+    color:rgb(12, 88, 88);
+    border: none;
+    transition: ease 0.1s;
+}
+.instruction-container .left-button{
+    position: absolute;
+    left: 0;
+    top: 200px;
+} 
+.instruction-container .right-button{
+    position: absolute;
+    right: 0;
+    top: 200px;
+} 
 .game-page{
     width: 100%;
     height: 100%;
@@ -278,7 +358,7 @@ hr{
 .game-page .countdown-container{
     width: 100%;
     height: 100%;
-    background :rgba(0, 0, 0, 0.766);
+    background :rgba(0, 0, 0, 0.826);
     position: absolute;
     top: 0;
     left: 0;
@@ -287,7 +367,7 @@ hr{
     align-items: center;
 }
 .game-page .countdown-container .countdown{
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 6rem;
     font-weight: bold;
     font-family: "Poppins", Helvetica;
@@ -321,7 +401,9 @@ hr{
     background-image: url(Pictures/user-icon.png);
     background-size: 100% !important;
 }
-
+#Time-left{
+    color:#206d5c
+}
 .game-page .result-container .result .result-buttons button{
     background: white;
     padding: 10px 40px;
@@ -361,6 +443,7 @@ hr{
     justify-content: center;
     align-items: center;
     height: 140px;
+    gap:4px;
 }
 .game-page .container .about-corner .player .player-avatar{
     width: 100%;

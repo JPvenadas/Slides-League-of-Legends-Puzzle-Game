@@ -31,6 +31,14 @@ let resultContainer = document.querySelector('.result-container')
 let resultstring = document.querySelector('.Result')
 let Resultpic = document.querySelector('.user-pic')
 let playagain = document.querySelector('.replay')
+let next = document.querySelector('.Nextlevel')
+let instructionbutton = document.querySelector('.instructions-button')
+let instructionCon = document.querySelector('.instruction-container')
+let leftinstruction = document.querySelector('.left-button')
+let rightinstruction = document.querySelector('.right-button')
+let instructiontop = document.querySelector('.instructions-top')
+let instructionbot = document.querySelector('.instructions-bot')
+let instructionback = document.querySelector('.instruction-back')
 
 //set up the animation of the Grid (this is a tool for animating your Grid elements, I use this because css transition dont work on grid)
 const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(puzzleBoard, {stagger: 50});
@@ -42,6 +50,7 @@ let time;
 let timerActive;
 let timer
 let chosenPic
+let instructionPos = 0
 let easyArrange = [1,2,3,4,5,6,7,8,9]
 let NormalArrange = [1,2,3,10,4,5,6,11,7,8,9,12,13,14,15,16]
 let difficultArrange = [1,2,3,10,17,4,5,6,11,18,7,8,9,12,19,13,14,15,16,20,21,22,23,24,25]
@@ -50,7 +59,7 @@ start.addEventListener('click', ()=>{
     options.style.top = "0"
 })
 firstback.addEventListener('click', ()=>{
-    options.style.top = "-400%"
+    options.style.top = "-200%"
 })
 playerName.addEventListener('keydown', ()=>{
    if(playerName.value !== "" || playerName.value !== " "){
@@ -58,13 +67,37 @@ playerName.addEventListener('keydown', ()=>{
    }
 })
 btnSave.addEventListener('click', ()=>{
-    upperOptions.style.transform = "translateX(-100%)";
-    lowerOptions.style.transform = "translateX(0)";
+    upperOptions.style.transform = "translateX(-100%)"
+    lowerOptions.style.transform = "translateX(0)"
 })
 playerName.addEventListener('keydown', ()=>{
     playerName.classList.remove("pop")
     playerName.offsetWidth
     playerName.classList.add('pop')
+})
+instructionbutton.addEventListener('click', ()=>{
+    instructiontop.style.transform = "translateX(0)"
+    instructionbot.style.transform = "translateX(-400%)"
+    leftinstruction.style.display = "none"
+    rightinstruction.style.display = "block"
+    instructionPos = 0
+    instructionCon.style.top = "0"
+})
+rightinstruction.addEventListener('click', ()=>{
+   moveInstruction("Right")
+})
+leftinstruction.addEventListener('click', ()=>{
+    moveInstruction("Left")
+})
+let moveInstruction = (direction)=>{
+    direction == "Left"? instructionPos--: instructionPos++;
+    instructionPos == 0? leftinstruction.style.display= "none": leftinstruction.style.display= "block"
+    instructionPos == 4? rightinstruction.style.display= "none": rightinstruction.style.display= "block";
+    instructionbot.style.transform =`translateX(-${400 -(instructionPos * 100)}%)`
+    instructiontop.style.transform =`translateX(-${100 * instructionPos}%)`
+}
+instructionback.addEventListener('click', ()=>{
+    instructionCon.style.top= "-300%"
 })
 secondback.addEventListener('click', ()=>{
     upperOptions.style.transform = "translateX(0)";
@@ -112,17 +145,17 @@ modes.forEach(mode =>{
 restart.addEventListener('click', ()=>{
     if(gameLevel == "Easy"){
         setPosition(solvablearray(9))
-        time = 120
+        time = 180
         
     }
     if(gameLevel == "Normal"){
         setPosition(solvablearray16())
-        time = 210
+        time = 300
         
     }
     if(gameLevel == "Difficult"){
         setPosition(solvablearray(25))
-        time = 285
+        time = 420
     }
    
     
@@ -136,23 +169,28 @@ let GameFormat = (level) =>{
      CreateTiles(9)
      puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3" "P4 P5 P6" "P7 P8 P9"'
      setPosition(solvablearray(9))
-     time = 120
+     time = 180
    }
    else if(level === "Normal"){
     gameLevel = "Normal"
     CreateTiles(16)
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10" "P4 P5 P6 P11" "P7 P8 P9 P12" "P13 P14 P15 P16"'
     setPosition(solvablearray16())
-    time = 210
+    time = 300
    }
    else if(level === "Difficult"){
     gameLevel = "Difficult"
     CreateTiles(25)
     puzzleBoard.style.gridTemplateAreas = '"P1 P2 P3 P10 P17" "P4 P5 P6 P11 P18" "P7 P8 P9 P12 P19" "P13 P14 P15 P16 P20" "P21 P22 P23 P24 P25"'
     setPosition(solvablearray(25))
-    time = 285
+    time = 420
+    next.style.display = "none"
    }
-   forceGridAnimation()
+   let minutes = time / 60
+   let seconds = time % 60
+   minutes <10?minutes = "0"+ minutes: minutes
+   seconds <10 ? seconds = "0" + seconds: seconds 
+   Duration.innerText = `${minutes}:${seconds}`
 }
 let CreateTiles = (tilenumber) =>{
     let easyPos = [[0,0],[-133,0],[-266,0],
@@ -331,6 +369,8 @@ function setupGame(){
           checkSuccess()
         })
     })
+    upperOptions.style.transform = "translateX(0)"
+    lowerOptions.style.transform = "translateX(-100%)"
 }
 function setupField(){
         playerName2.innerText = playerName.value
@@ -373,6 +413,7 @@ let = activateTimer = () =>{
         time--
         if(time < 0){
            clearInterval(timer)
+           clearInterval(timerActive)
           resultContainer.style.display = "flex"
           resultContainer.style.animation = "spawn 1s"
            buttons.forEach(button=>{
@@ -399,6 +440,7 @@ let checkSuccess = ()=>{
     if(CorrectPosNo == buttons.length){
         let lastTile =  buttons[buttons.length - 1]
         clearInterval(timer)
+        clearInterval(timerActive)
         lastTile.style.background = buttons[1].style.background
          gameLevel == "Easy"? lastTile.style.backgroundPosition = "-266px -266px":
          gameLevel == "Normal"? lastTile.style.backgroundPosition = "-300px -300px":
@@ -407,6 +449,8 @@ let checkSuccess = ()=>{
          lastTile.style.display = "none"
          lastTile.style.display = "block"
          resultContainer.style.display = "flex"
+         resultstring.innerText = "Success!"
+            Resultpic.style.background = "url(Pictures/user-icon.png)"
          buttons.forEach(button=>{
             button.Disbled = true
          })
@@ -418,5 +462,13 @@ playagain.addEventListener('click', ()=>{
     gameLevel == "Normal"? GameFormat("Normal"):
     GameFormat("Difficult")
     resultContainer.style.display = "none"
+    setupGame()
+})
+next.addEventListener('click', ()=>{
+    resultContainer.style.display = 'none'
+    puzzleBoard.html = ""
+    gameLevel == "Easy"? GameFormat("Normal"):
+    gameLevel == "Normal"? GameFormat("Difficult"):
+    setupField()
     setupGame()
 })

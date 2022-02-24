@@ -365,6 +365,7 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 .game-page .countdown-container .countdown{
     color: rgb(255, 255, 255);
@@ -726,7 +727,7 @@ hr{
     }
     .options-container .options-page .options-top .player-info-top h2{
         color:rgb(102, 66, 13);
-        font-size: .9rem;
+        font-size: .8rem;
     }
     .options-container .options-page .options-top{
         min-width: 324px;
@@ -758,9 +759,13 @@ hr{
        grid-template-columns: none;
        grid-template-rows: 1fr 5fr;
        width: 95%;
+       height: 450px;
     }
     .game-page .container .about-corner{
        flex-direction: row;
+    }
+    .game-page .container .about-corner .settings{
+        background: transparent;
     }
     .game-page .container .game-corner .game-header{
         display: none;
@@ -773,13 +778,21 @@ hr{
         width: 300px;
         height: 300px;
     }
+    .game-page .container .about-corner{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
     .game-page .container .about-corner .game-stat{
         position: absolute;
-        top:70px;
+        top:40px;
         left: 0;
         width: 100vw;
         flex-direction: row;
         background: white;
+        font-size: .7rem;
+        z-index: 0;
+        padding: 10px 20px;
     }
     .game-page .container .about-corner .player{
         position: absolute;
@@ -788,14 +801,19 @@ hr{
         background:rgb(12, 88, 88);
         flex-direction: row;
         width: 100vw;
-        height:70px;
+        height:40px;
         justify-content: flex-start;
     }
+    
     .game-page .container .about-corner .player .player-avatar{
-        width: 70px;
-        height: 70px;
+        width: 40px;
+        height: 40px;
     }
     .game-page .container .about-corner .player .player-avatar img{
+        width: 30px;
+        height: 30px;
+    }
+    .game-page .container .about-corner .goal .btn-goal{
         width: 50px;
         height: 50px;
     }

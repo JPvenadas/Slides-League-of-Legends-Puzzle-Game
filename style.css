@@ -11,7 +11,7 @@
 }
 body{
     width: 100vw;
-    height: 100vh;
+    height: 100vh !important;
     min-height: 600px;
 }
 input[type=radio]{
@@ -31,7 +31,7 @@ hr{
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     background-color: linear-gradient(to right, rgb(42, 143, 80), rgb(179, 148, 49));
     background: url(Pictures/Background.jpg) no-repeat center;
@@ -709,8 +709,9 @@ hr{
 }
 @media (max-width:700px){
     body{
-        min-height: 700px;
-        height: 100vh;
+        min-height: 700px !important;
+        height: 100vh !important;
+        overflow: hidden;
     }
     .welcome-screen-container .welcome{
        max-width: 450px;
@@ -760,6 +761,7 @@ hr{
        grid-template-rows: 1fr 5fr;
        width: 95%;
        height: 450px;
+       margin-top: 40px;
     }
     .game-page .container .about-corner{
        flex-direction: row;
@@ -816,5 +818,21 @@ hr{
     .game-page .container .about-corner .goal .btn-goal{
         width: 50px;
         height: 50px;
+    }
+    .game-page .menu-container div{
+        width: 90%;
+        height: 350px;
+    }
+    .game-page .goal-container div{
+        width: 90vw;
+        height: 90vw;
+        max-width: 420px;
+        max-height: 420px;
+    }
+    .game-page .goal-container div img{
+        width: 85vw;
+        height: 85vw;
+        max-width: 400px;
+        max-height: 400px;
     }
 }

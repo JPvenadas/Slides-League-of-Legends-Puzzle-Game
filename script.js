@@ -193,18 +193,18 @@ let GameFormat = (level) =>{
    Duration.innerText = `${minutes}:${seconds}`
 }
 let CreateTiles = (tilenumber) =>{
-    let easyPos = [[0,0],[-133,0],[-266,0],
-                   [0,-133],[-133,-133],[-266,-133],
-                   [0,-266],[-133,-266]]
-    let normalPos =  [[0.0],[-100,0],[-200,0],[-300,0],
-                   [0,-100],[-100,-100],[-200,-100],[-300,-100],
-                   [0,-200],[-100,-200],[-200,-200],[-300,-200],
-                   [0,-300],[-100,-300],[-200,-300]]
-    let hardPos = [[0,0],[-80,0],[-160,0],[-240,0],[-320,0],
-                   [0,-80],[-80,-80],[-160,-80],[-240,-80],[-320,-80],
-                   [0,-160],[-80,-160],[-160,-160],[-240,-160],[-320,-160],
-                   [0,-240],[-80,-240],[-160,-240],[-240,-240],[-320,-240],
-                   [0,-320],[-80,-320],[-160,-320],[-240,-320]]
+    let easyPos = [[0,0],[50,0],[100,0],
+                   [0,50],[50,50],[100,50],
+                   [0,100],[50,100]]
+    let normalPos =  [[0.0],[33.3,0],[66.6,0],[100,0],
+                   [0,33.3],[33.3,33.3],[66.6,33.3],[100,33.3],
+                   [0,66.0],[33.3,66.6],[66.6,66.6],[100,-66.6],
+                   [0,100],[33.3,100],[66.6,100]]
+    let hardPos = [[0,0],[25,0],[50,0],[75,0],[100,0],
+                   [0,25],[25,25],[50,25],[75,25],[100,25],
+                   [0,50],[25,50],[50,50],[75,50],[100,50],
+                   [0,75],[25,75],[50,75],[75,75],[100,75],
+                   [0,100],[25,100],[50,100],[75,100]]
     puzzleBoard.innerHTML = "";
     chosenPic = `Pictures/Puzzle_Pics/${Math.floor(Math.random() * 26) + 1}.jpg`
     for(let num= 0; num < tilenumber; num++){
@@ -219,9 +219,9 @@ let CreateTiles = (tilenumber) =>{
         else{ 
             tile.style.background =  `url(${chosenPic})`
             tile.className = `button${num + 1}`
-            gameLevel == "Easy"?  tile.style.backgroundPosition = `${easyPos[num][0]}px ${easyPos[num][1]}px`:
-            gameLevel == "Normal"? tile.style.backgroundPosition = `${normalPos[num][0]}px ${normalPos[num][1]}px`:
-            gameLevel == "Difficult"? tile.style.backgroundPosition = `${hardPos[num][0]}px ${hardPos[num][1]}px`:
+            gameLevel == "Easy"?  tile.style.backgroundPosition = `${easyPos[num][0]}% ${easyPos[num][1]}%`:
+            gameLevel == "Normal"? tile.style.backgroundPosition = `${normalPos[num][0]}% ${normalPos[num][1]}%`:
+            gameLevel == "Difficult"? tile.style.backgroundPosition = `${hardPos[num][0]}% ${hardPos[num][1]}%`:
             tile.style.gridArea = `P${num+1}`
             tile.disabled = true
         }  
@@ -292,7 +292,7 @@ let unlock = (list, emptyposition, tiles) =>{
         do{
             random = Randomizer(num)
             inversionsStatus = inversionchecker(random)
-        }while(numstatus === inversionsStatus)
+        }while(numstatus == inversionsStatus)
         return random
  }
  let solvablearray16 = () =>{
@@ -442,9 +442,7 @@ let checkSuccess = ()=>{
         clearInterval(timer)
         clearInterval(timerActive)
         lastTile.style.background = buttons[1].style.background
-         gameLevel == "Easy"? lastTile.style.backgroundPosition = "-266px -266px":
-         gameLevel == "Normal"? lastTile.style.backgroundPosition = "-300px -300px":
-         lastTile.style.backgroundPosition = "-320px -320px"
+         lastTile.style.backgroundPosition = "100% 100%"
          lastTile.style.animation =  "spawn 2s"
          lastTile.style.display = "none"
          lastTile.style.display = "block"

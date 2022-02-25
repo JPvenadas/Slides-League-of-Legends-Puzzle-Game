@@ -37,27 +37,27 @@
                     </button>
                     <button class="easy mode-container">
                             <div>
-                                <h3>Easy</h3>
+                                <h2>Easy</h2>
                                 <h3>3x3</h3>
                             </div>
                             <hr>
-                            <h6>2:00 min</h6>
+                            <h6>3:00 min</h6>
                     </button>
                     <button class="normal mode-container">
                             <div>
-                                <h3>Normal</h3>
+                                <h2>Normal</h2>
                                 <h3>4x4</h3>
                             </div>
                             <hr>
-                            <h6>3:30 min</h6>
+                            <h6>5:00 min</h6>
                     </button>
                     <button class="difficult mode-container">
                             <div>
-                                <h3>Difficult</h3>
+                                <h2>Difficult</h2>
                                 <h3>5x5</h3>
                             </div>
                            <hr>
-                            <h6>4:45 min</h6>
+                            <h6>7:00 min</h6>
                     </button>
                 </div>
             </div>
@@ -72,16 +72,45 @@
         </div>
     </div>
     <div class="instruction-container">
+        <div class="instructions">
+            <button class="left-button" style="display: none;"><i class="fas fa-chevron-left"></i></button>
+            <button class="right-button"><i class="fas fa-chevron-right"></i></button>
+            <div class="instructions-top">
+                <div class="instruction1-top" style="background: url(Pictures/Instructions/Instructions-1.png)"></div>
+                <div class="instruction2-top"  style="background: url(Pictures/Instructions/Instructions-2.png)"></div>
+                <div class="instruction3-top"  style="background: url(Pictures/Instructions/Instructions-3.png)"></div>
+                <div class="instruction4-top"  style="background: url(Pictures/Instructions/Instructions-4.png);"></div>
+                <div class="instruction5-top"  style="background: url(Pictures/Instructions/Instruction-5.png);"></div>
+            </div>
+            <div class="instructions-bot">
+                <div class="instruction4-bot" style="background: rgb(40, 85, 98);"><button class="instruction-back">Back</button></div>
+                <div class="instruction4-bot" style="background: rgb(78, 27, 80);">Slide and arrange the tiles to their corresponding Positions for you to win the game</div>
+                <div class="instruction3-bot" style="background: rgb(128, 73, 36);">Solve the picture by moving the parts in the available empty area, Remember: You have to solve it in a specified Duration </div>
+                <div class="instruction2-bot" style="background: rgb(149, 112, 44);">At the start of the Game, you will be presented a random image with jumbled parts</div>
+                <div class="instruction1-bot" style="background: rgb(41, 80, 33);">First, You have to choose a difficulty level you want to take (Easy, Normal, Hard). Each have a corresponding game Duration</div>
+            </div>
+        </div>
     </div>
     <main class="game-page">
         <div class="countdown-container">
             <h6 class="countdown">3</h6>
         </div>
+        <div class="result-container">
+            <div class="result">
+                <div class="user-pic"></div>
+                <h1 class="Result">Success!<h1>
+                <div class="result-buttons">
+                    <button class="menu"><i class="fas fa-bars"></i></button>
+                    <button class="replay"><i class="fas fa-redo"></i></button>
+                    <button class="Nextlevel"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
         <div class="menu-container">
             <div>
                 <h1>Slides</h1>
                 <button id="resume">Resume</button>
-                <button id="menu">Main menu</button>
+                <button class="menu">Main menu</button>
             </div>
         </div>
         <div class="goal-container">

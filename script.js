@@ -238,6 +238,7 @@ let Randomizer = (num) =>{
            array.push(randomNum);
        }
     }
+    console.log(array)
    return array
 }
 

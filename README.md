@@ -1,15 +1,15 @@
-## Slides: `Sliding-Puzzle-Game`
+# Slides: `Sliding-Puzzle-Game`
 ![PictureImage](/Pictures/Preview1.jpg)  
 ![PictureImage](/Pictures/Preview2.jpg) 
 
-### Description
+## Description
 
 This game is a classic sliding puzzle game with a League of legend Theme. You have to slide the tiles until the desired Image of the champion is formed.
 
 > Credits to League of legends Pictures
 
 Developed using only HTML, CSS, and Vanilla Javascript
-### Game Features
+## Game Features
 
 - Up to 50+ Different Puzzle Pictures
 - League of Legends Theme
@@ -26,6 +26,6 @@ Developed using only HTML, CSS, and Vanilla Javascript
     - 7:00 minutes of time
 
 
-###### Wanna try out? 
+#### Wanna try out? 
 [Click here for the Demo](https://slidespuzzle.netlify.app/)
 

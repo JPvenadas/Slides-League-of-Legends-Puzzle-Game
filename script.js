@@ -206,7 +206,7 @@ let CreateTiles = (tilenumber) =>{
                    [0,75],[25,75],[50,75],[75,75],[100,75],
                    [0,100],[25,100],[50,100],[75,100]]
     puzzleBoard.innerHTML = "";
-    chosenPic = `Pictures/Puzzle_Pics/${Math.floor(Math.random() * 26) + 1}.jpg`
+    chosenPic = `Pictures/Puzzle_Pics/${Math.floor(Math.random() * 53) + 1}.jpg`
     for(let num= 0; num < tilenumber; num++){
         let tile = document.createElement("button")
         puzzleBoard.appendChild(tile)
@@ -238,7 +238,6 @@ let Randomizer = (num) =>{
            array.push(randomNum);
        }
     }
-    console.log(array)
    return array
 }
 

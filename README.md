@@ -8,7 +8,8 @@ This game is a classic sliding puzzle game with a League of legend Theme. You ha
 
 > Credits to League of legends Pictures
 
-Developed using only HTML, CSS, and Vanilla Javascript
+## Development
+ Developed using only HTML, CSS, and Vanilla Javascript
 ## Game Features
 
 - Up to 50+ Different Puzzle Pictures

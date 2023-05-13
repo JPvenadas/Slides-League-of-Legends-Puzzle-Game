@@ -1,3 +1,5 @@
+gsap.registerPlugin(Flip);
+
 // these are the html elements that the javascript will be using
 let start = document.querySelector('.start-button')
 let welcome = document.querySelector('.welcome-screen-container');
@@ -39,9 +41,9 @@ let rightinstruction = document.querySelector('.right-button')
 let instructiontop = document.querySelector('.instructions-top')
 let instructionbot = document.querySelector('.instructions-bot')
 let instructionback = document.querySelector('.instruction-back')
+let audio = document.querySelector("#clickSound")
 
 //set up the animation of the Grid (this is a tool for animating your Grid elements, I use this because css transition dont work on grid)
-const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(puzzleBoard, {stagger: 50});
 
 //variables that will be used
 let gameLevel;
@@ -160,7 +162,6 @@ restart.addEventListener('click', ()=>{
    
     
     unlock(unlocklist, trimGridArea(document.querySelector('.empty-tile').style.gridArea), buttons)
-    forceGridAnimation()
     ChangeMoves("reset")
 })
 let GameFormat = (level) =>{
@@ -186,6 +187,8 @@ let GameFormat = (level) =>{
     time = 420
     next.style.display = "none"
    }
+
+   document.querySelector('.game-page').style.display = "flex";
    let minutes = time / 60
    let seconds = time % 60
    minutes <10?minutes = "0"+ minutes: minutes
@@ -242,10 +245,40 @@ let Randomizer = (num) =>{
 }
 
 let setPosition = (Randomnumbers) =>{
+    buttons = Array.from(puzzleBoard.querySelectorAll('button'))
+    let clickedTileState = Flip.getState(buttons)
+
     for(let num=1; num < Randomnumbers.length; num++){
        document.querySelector(`.button${num}`).style.gridArea = `P${Randomnumbers[num-1]}`
     }
         document.querySelector('.empty-tile').style.gridArea = `P${Randomnumbers[Randomnumbers.length -1]}`
+
+    if(Randomnumbers.length <= 9){
+        let shuffle = setInterval(()=>{
+            audio.pause()
+            audio.volume = 0.08
+            audio.load()
+            audio.play()
+        }, 150)
+    
+        setTimeout(()=>{
+            clearInterval(shuffle);
+        }, 500)
+    }else{
+        let shuffle = setInterval(()=>{
+            audio.pause()
+            audio.volume = 0.08
+            audio.load()
+            audio.play()
+        }, 150)
+    
+        setTimeout(()=>{
+            clearInterval(shuffle);
+        }, 1000)
+        
+    }
+
+    Flip.from(clickedTileState, {duration: 0.3, ease: 'power1.out', stagger: 0.05, absolute: 1})     
 }
 let unlocklist = {
     P1: ['P2', 'P4'],
@@ -359,12 +392,20 @@ function setupGame(){
     let empty = document.querySelector('.empty-tile')
     buttons.map(clickabletiles=>{
         clickabletiles.addEventListener('click', ()=>{
+         
+          
+          audio.pause()
+          audio.volume = 0.08
+          audio.load()
+          audio.play()
+          
           emptypos = trimGridArea(empty.style.getPropertyValue('grid-area'))
           currentpos = trimGridArea(clickabletiles.style.getPropertyValue('grid-area'));
-          clickabletiles.style.setProperty("grid-area", emptypos)
+          let clickedTileState = Flip.getState(buttons)
+          clickabletiles.style.setProperty("grid-area", emptypos);
           empty.style.setProperty('grid-area',currentpos)
           unlock(unlocklist,currentpos,buttons)
-          forceGridAnimation();
+          Flip.from(clickedTileState, {duration: 0.3, ease: 'power1.out', absolute: 1})
           ChangeMoves("add")
           checkSuccess()
         })
@@ -470,3 +511,4 @@ next.addEventListener('click', ()=>{
     setupField()
     setupGame()
 })
+

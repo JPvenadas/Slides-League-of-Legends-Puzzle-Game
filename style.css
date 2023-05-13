@@ -43,7 +43,7 @@ hr{
     font-size: .8rem;
     animation: spawn 1s;
 }
-.welcome-screen-container .welcome{
+ .welcome{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,17 +56,17 @@ hr{
     z-index: 1;
     box-shadow: 2px 2px 10px black;
 }
-.welcome-screen-container .welcome .game-title{
+.welcome .game-title{
     font-family: "Architects daughter";
     font-size: 3.8rem;
     font-weight: bolder;
     color: rgb(192, 100, 39);
     text-shadow: 2px 2px 10px rgb(93, 93, 93);
 }
-.welcome-screen-container .welcome .game-subtitle{
+ .game-subtitle{
     font-size: 1rem;
 }
-.welcome-screen-container .welcome .start-button{
+ .start-button{
     padding: 12px 100px;
     border-radius: 10px;
     outline: none;
@@ -79,7 +79,7 @@ hr{
    
 }
 
-.welcome-screen-container .welcome .instructions-button{
+.welcome .instructions-button{
     padding: 4px 40px;
     background: rgb(32, 139, 107);
     color: white;
@@ -89,12 +89,12 @@ hr{
     transition: ease .3s ;
     border: none;
 }
-.welcome-screen-container .welcome .start-button:active,
-.welcome-screen-container .welcome .instructions-button:active{
+.start-button:active,
+.instructions-button:active{
     animation: clicked .1s;
  }
-.welcome-screen-container .welcome .start-button:hover,
-.welcome-screen-container .welcome .instructions-button:hover{
+.start-button:hover,
+.instructions-button:hover{
     transform: scale(1.1);
     transition: ease .2s ;
 }
@@ -111,7 +111,7 @@ hr{
     z-index: 4;
     transition: ease-in-out .5s;
 }
-.options-container .options-page{
+.options-page{
     width: 600px;
     height: 500px;
     background: white;
@@ -122,14 +122,14 @@ hr{
     overflow: hidden;
    
 }
-.options-container .options-page .options-top,
-.options-container .options-page .options-bot{
+.options-page .options-top,
+.options-page .options-bot{
    width: auto;
    display: flex;
    flex-direction: row;
   
 }
-.options-container .options-page .options-top{
+.options-top{
     background: white;
     border-radius: 15px;
     width: auto;
@@ -137,12 +137,12 @@ hr{
     flex-direction: row;
     transition: .75s ease;
 }
-.options-container .options-page .options-top > div,
-.options-container .options-page .options-bot > div{
+.options-top > div,
+.options-bot > div{
     width: 100%;
     flex-shrink: 0;
 }
-.options-container .options-page .options-top .player-info-top{
+.player-info-top{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -152,7 +152,7 @@ hr{
     background: white;
                                         
 }
-.options-container .options-page .back{
+.options-page .back{
     position: absolute;
     top: 0;
     left: 0;
@@ -166,21 +166,21 @@ hr{
     font-size: 1.2rem;
     transition: ease .6s;
 }
-.options-container .options-page .back:hover{
+.options-page .back:hover{
     background: rgba(76, 247, 253, 0.493);
 }
-.options-container .options-page .options-top .player-info-top h2{
+.player-info-top h2{
     color:rgb(102, 66, 13);
     font-size: 1.2rem;
 }
-.options-container .options-page .options-top .player-info-top img{
+.player-info-top img{
     width: 200px;
     height: 180px;
     border-radius: 50%;
     box-shadow: 0px 0px 4px gray;
     
 }
-.options-container .options-page .options-top .player-info-top input{
+.player-info-top input{
     padding: 9px 3px;
     border-radius: 15px;
     border: none;
@@ -190,10 +190,10 @@ hr{
     border: 1px solid rgb(104, 70, 31);
     transition: .2s ease;
 }
-.options-container .options-page .options-top .player-info-top input:hover{
+.player-info-top input:hover{
     transform: scale(1.03);
 }
-.options-container .options-page .options-top .difficulty-top{
+.difficulty-top{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -202,10 +202,10 @@ hr{
     color:rgb(12, 88, 88);
     position: relative;
 }
-.options-container .options-page .options-top .difficulty-top h1{
+.difficulty-top h1{
     font-size: 1.2rem;
 }
-.options-container .options-page .options-top .difficulty-top .mode-container{
+.mode-container{
     width: 85%;
     height: 90px;
     border-radius: 5px;
@@ -216,23 +216,22 @@ hr{
     border: none;
     color:rgb(33, 125, 141)
 }
-.options-container .options-page .options-top 
-.difficulty-top .mode-container:active{
+.mode-container:active{
     animation: clicked .1s;
 }
-.options-container .options-page .options-top .difficulty-top .mode-container:hover{
+.mode-container:hover{
         transform: scale(1.02);
 }
-.options-container .options-page .options-top .difficulty-top .mode-container div{
+.mode-container div{
     display: flex;
     justify-content: space-between;
 }
-.options-container .options-page .options-bot{
+.options-bot{
     width: auto;
     transform: translateX(-100%);
     transition: .75s ease;
 }
-.options-container .options-page .options-bot .difficulty-bot{
+.difficulty-bot{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -240,13 +239,13 @@ hr{
     background:rgb(27, 70, 46)
     
 }
-.options-container .options-page .options-bot .player-info-bot{
+.player-info-bot{
     display: flex;
     justify-content: center;
     align-items: center;
     background: rgb(172, 118, 49);
 }
-.options-container .options-page .options-bot .player-info-bot button{
+ .player-info-bot button{
     color:rgb(90, 65, 19);
     font-weight: bolder;
     border: none;
@@ -256,10 +255,10 @@ hr{
     border-radius: 10px;
     transition: ease .1s;
 }
-.options-container .options-page .options-bot .player-info-bot button:hover{
+.player-info-bot button:hover{
     transform: scale(1.05)
 }
-.options-container .options-page .options-bot .player-info-bot button:active{
+.player-info-bot button:active{
     animation: clicked .1s;
 }
 .instruction-container{
@@ -284,15 +283,15 @@ hr{
     overflow: hidden;
     border-radius: 15px;
 }
-.instruction-container .instructions .instructions-bot, 
-.instruction-container .instructions .instructions-top{
+.instructions-bot, 
+.instructions-top{
     display: flex;
     flex-direction: row;
     width: auto;
     transition: ease .6s;
 }
-.instruction-container .instructions .instructions-bot div,
-.instruction-container .instructions .instructions-top div{
+.instructions-bot div,
+.instructions-top div{
     width: 100%;
     flex-shrink: 0;
     background-size: 100% 100% !important;
@@ -303,12 +302,12 @@ hr{
     text-align: center;
 }
 
-.instruction-container .instructions .instructions-bot{
+.instructions-bot{
     transform: translateX(-400%);
     color: white
 }
 
-.instruction-container .instructions button{
+.instructions button{
     background: transparent;
     width: 40px;
     height: 40px;
@@ -348,7 +347,7 @@ hr{
     width: 100%;
     height: 100vh;
     z-index: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     background: linear-gradient(to right, rgb(18, 153, 177), rgb(97, 230, 235));
@@ -565,7 +564,7 @@ hr{
 }
 .game-page .container .game-corner .game-board .puzzle-board button{
     border: none;
-    background-size: 400px!important;    
+    background-size: 400px!important; 
 }
 .game-page .container .game-corner .game-board .puzzle-board button:not(:last-child):hover{
     box-shadow: 0px 0px 10px black;
